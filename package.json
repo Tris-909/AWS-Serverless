@@ -6,7 +6,8 @@
   "scripts": {
     "test": "serverless-bundle test",
     "checkList": "serverless invoke local --function list --path mocks/list-event.json",
-    "checkUpdate": "serverless invoke local --function update --path mocks/update-event.json"
+    "checkUpdate": "serverless invoke local --function update --path mocks/update-event.json",
+    "checkDelete": "serverless invoke local --function delete --path mocks/delete-event.json"
   },
   "author": "",
   "license": "MIT",
