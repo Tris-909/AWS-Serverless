@@ -4,7 +4,9 @@
   "description": "A Node.js starter for Serverless Framework with ES6 and TypeScript support",
   "main": "handler.js",
   "scripts": {
-    "test": "serverless-bundle test"
+    "test": "serverless-bundle test",
+    "checkList": "serverless invoke local --function list --path mocks/list-event.json",
+    "checkUpdate": "serverless invoke local --function update --path mocks/update-event.json"
   },
   "author": "",
   "license": "MIT",
