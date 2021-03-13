@@ -33,12 +33,21 @@ provider:
       Resource: "arn:aws:dynamodb:ap-southeast-2:559493127305:*:*"
 
 functions:
+  billing:
+    handler: billing.main
+    events:
+      - http:
+          path: billing
+          method: post
+          cors: true
+          authorizer: aws_iam
   create:
     handler: create.main
     events:
       - http:
           path: notes
           method: post
+          cors: true
           authorizer: aws_iam
   list:
     handler: list.main
@@ -46,6 +55,7 @@ functions:
       - http:
           path: notes
           method: get
+          cors: true
           authorizer: aws_iam
   get:
     handler: get.main
@@ -53,6 +63,7 @@ functions:
       - http:
           path: notes/{id}
           method: get
+          cors: true
           authorizer: aws_iam
   update:
     handler: update.main
@@ -60,6 +71,7 @@ functions:
       - http:
           path: notes/{id}
           method: put
+          cors: true
           authorizer: aws_iam
   delete:
     handler: delete.main
@@ -67,11 +79,8 @@ functions:
       - http:
           path: notes/{id}
           method: delete
+          cors: true
           authorizer: aws_iam
-  billing:
-    handler: billing.main
-    events:
-      - http:
-          path: billing
-          method: post
-          authorizer: aws-iam
+
+resources:
+  - ${file(resources/api-gateway-errors.yml)}
