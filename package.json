@@ -6,8 +6,11 @@
   "scripts": {
     "test": "serverless-bundle test",
     "checkList": "serverless invoke local --function list --path mocks/list-event.json",
+    "checkCreate": "serverless invoke local --function create --path mocks/create-event.json",
     "checkUpdate": "serverless invoke local --function update --path mocks/update-event.json",
-    "checkDelete": "serverless invoke local --function delete --path mocks/delete-event.json"
+    "checkDelete": "serverless invoke local --function delete --path mocks/delete-event.json",
+    "checkGet": "serverless invoke local --function get --path mocks/get-event.json",
+    "checkBilling": "serverless invoke local --function billing --path mocks/billing-event.json"
   },
   "author": "",
   "license": "MIT",
@@ -22,6 +25,7 @@
     "serverless-offline": "^5.3.3"
   },
   "dependencies": {
+    "stripe": "^8.138.0",
     "uuid": "^7.0.3"
   }
 }

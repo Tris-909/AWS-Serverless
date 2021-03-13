@@ -1,4 +1,4 @@
-service: notes-api
+service: aws-serverless-tritran-notes
 
 # Create an optimized package for our functions
 package:
@@ -17,19 +17,20 @@ provider:
 
   environment:
     tableName: notes
+    stripeSecretKey: ${env:sk_test_51HAoKfAme8pLIFa53koVhDlswqlHwJjOUlVIaEHw3NhVHPVbwCkW3KpntNSPDjRpSidi4JNoHfQzjG9Kh65Y8xd500rmXzwlez}
 
   # Permission Policy for Lambda Function
   iamRoleStatements:
     - Effect: Allow
       Action:
-        - dynamodb: Scan
-        - dynamodb: Query
-        - dynamodb: GetItem
-        - dynamodb: PutItem
-        - dynamodb: UpdateItem
-        - dynamodb: DeleteItem
-        - dynamodb: DescribeTable
-      Resource: "arn:aws:dynamodb:ap-southeast-2:*:*"
+        - dynamodb:Scan
+        - dynamodb:Query
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+        - dynamodb:DescribeTable
+      Resource: "arn:aws:dynamodb:ap-southeast-2:559493127305:*:*"
 
 functions:
   create:
@@ -38,27 +39,39 @@ functions:
       - http:
           path: notes
           method: post
+          authorizer: aws_iam
   list:
     handler: list.main
     events:
       - http:
           path: notes
           method: get
+          authorizer: aws_iam
   get:
     handler: get.main
     events:
       - http:
           path: notes/{id}
           method: get
+          authorizer: aws_iam
   update:
     handler: update.main
     events:
       - http:
           path: notes/{id}
           method: put
+          authorizer: aws_iam
   delete:
     handler: delete.main
     events:
       - http:
           path: notes/{id}
           method: delete
+          authorizer: aws_iam
+  billing:
+    handler: billing.main
+    events:
+      - http:
+          path: billing
+          method: post
+          authorizer: aws-iam

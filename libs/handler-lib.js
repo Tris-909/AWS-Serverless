@@ -8,6 +8,8 @@ export default function handler(lambda) {
         } catch (e) {
             body = { error: e.message };
             statusCode = 500;
+
+            return [500, body];
         }
         return {
             statusCode,
